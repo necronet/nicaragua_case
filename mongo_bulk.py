@@ -56,19 +56,19 @@ def bulk_tweets(filename,tweet_results,metadata):
     except BulkWriteError:
         pass
 
-#./nicaragua_abril//#SOSNicaragua_#Nicaragua_2018-04-29_1525137835.json
 def bulk_tweets_to_mongo(files=list_twitter_files()):
     filter_files = inserted_file_list()
     print(len(files))
     files = [f for f in files if f not in filter_files]
     print(len(files))
     for twitter_file in files:
-        metadata_file = './nicaragua/metadata/metadata_{}'.format(os.path.basename(os.path.normpath(twitter_file)))
-        twitter_results = open_twitter_json(twitter_file)
-        metadata_result = json.load(open(metadata_file))
-        print('Bulk insert {}'.format(twitter_file))
-        bulk_tweets(twitter_file, twitter_results,metadata_result)
-
-
+        try:
+            metadata_file = './nicaragua/metadata/metadata_{}'.format(os.path.basename(os.path.normpath(twitter_file)))
+            twitter_results = open_twitter_json(twitter_file)
+            metadata_result = json.load(open(metadata_file))
+            print('Bulk insert {}'.format(twitter_file))
+            bulk_tweets(twitter_file, twitter_results,metadata_result)
+        except FileNotFoundError:
+            pass
 
 results = bulk_tweets_to_mongo()
