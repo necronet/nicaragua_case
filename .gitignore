@@ -1,8 +1,13 @@
+.DS_Store
+
 secrets.yml
+
 *.zip
 *.json
+*.log
+
+#Generated folders
 bin/
 include/
 __pycache__/
 lib/
-.DS_Store
