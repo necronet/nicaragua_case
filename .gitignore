@@ -1,2 +1,8 @@
 secrets.yml
 *.zip
+*.json
+bin/
+include/
+__pycache__/
+lib/
+.DS_Store
